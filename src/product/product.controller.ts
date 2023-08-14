@@ -1,15 +1,14 @@
 import {
   Body,
   Controller,
-  NotFoundException,
+ 
   BadRequestException,
   Param,
   ParseIntPipe,
   Post,
   Get,
-  UsePipes,
-  ValidationPipe,
-  Patch,
+ 
+  Put,
   Delete,
 } from '@nestjs/common';
 import { productServices } from './product.service';
@@ -46,7 +45,7 @@ export class productController {
   }
 
   // update product by its id
-  @Patch('update/:id')
+  @Put('update/:id')
  
   async update(
     @Param('id', ParseIntPipe) id: number,

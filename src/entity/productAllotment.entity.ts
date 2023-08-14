@@ -1,36 +1,47 @@
-import { Collection, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity,  Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
  @Entity({name:"productallotment"})
-export class productAllotment{
+export class productAllotment extends BaseEntity{
    
      @PrimaryGeneratedColumn()
-     productAllotementId
-     @Column({name:"Date"})
+     productAllotmentId:number
+
+     @Column({name:"Date",nullable:true})
       date:string
-     @Column({name:"Date"})
-      vendorId:string
-     @Column({name:"Size"})
+
+     @Column({name:"vendorId"})
+      vendorId:number
+
+     @Column({name:"Size",nullable:true})
       size:string
-     @Column({name:"ProductQuantity"})
-      productQuantity:string
-     @Column({name:"VendorRate"})
+
+     @Column({name:"ProductQuantity",nullable:true})
+      productQuantity:number
+
+     @Column({name:"VendorRate",nullable:true})
       vendorRate:number
-     @Column({name:"DeliveryDate"})
+
+     @Column({name:"DeliveryDate",nullable:true})
       deliveryDate:string
-     @Column({name:"Amount"})
+
+     @Column({name:"Amount",nullable:true})
       totalAmount:number
-     @Column({name:"AdvancePayment"})
+
+     @Column({name:"AdvancePayment",nullable:true})
        advancePayment:number
-     @Column({name:"balanceAmmount"})
-      balanceAmount:string
-     @Column({name:"Description"})
+
+     @Column({name:"balanceAmmount",nullable:true})
+      balanceAmount: number
+
+     @Column({name:"Description",nullable:true})
       description:string
 
-      @Column({name:"productImage"})
+      @Column({name:"productImage",nullable:true})
        productImage:string
-       @Column({name:"companyId"})
-         companyId:number
+      
+       @Column({name:"productId"})
+         productId:number
         
          
      

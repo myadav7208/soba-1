@@ -15,6 +15,8 @@ import { Client } from './entity/client.entity';
 import { vendorModule } from './vendor/vendor.module';
 import { vendor } from './entity/vendor.entity';
 import { productModule } from './product/product.module';
+import { productAllotment } from './entity/productAllotment.entity';
+import { productAllotmentModule } from './productAlllotment/productAllotment.module';
 
 @Module({
   imports: [
@@ -34,7 +36,7 @@ import { productModule } from './product/product.module';
          autoLoadEntities:true,
            dropSchema:true,
             synchronize:true,
-        entities: [User, Company, Client, vendor],
+        entities: [User, Company, Client, vendor,productAllotment],
       }),
     }),
     companyModule,
@@ -42,7 +44,8 @@ import { productModule } from './product/product.module';
     userModule,
     clientModule,
     vendorModule,
-    productModule
+    productModule,
+    productAllotmentModule
   ],
   controllers: [AppController],
   providers: [AppService],
