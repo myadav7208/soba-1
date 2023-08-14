@@ -3,8 +3,12 @@ import {
   BaseEntity,
   Column,
   Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Company } from './company.entity';
 
 
 @Entity({ name: 'client' })
@@ -33,4 +37,7 @@ export class Client extends BaseEntity {
 
   @Column({ name: "city" })
   city: string;
+  @ManyToMany((type)=>Company,(company)=>company.clients,{cascade:true})
+   
+    companies:Company[]
 }

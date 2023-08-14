@@ -17,11 +17,7 @@ export class clientServices {
     private readonly client: Repository<Client>,
   ) { }
   async getOneClient(id: number) {
-    const client = await this.client.findOne({
-      where: {
-        clientId: id,
-      },
-    });
+    const client = await this.client.findOne({relations:['Company']});
     if (!client) {
       throw new NotFoundException('client doest not exist');
     }
