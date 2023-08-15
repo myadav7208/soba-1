@@ -23,12 +23,10 @@ export class productAllotmentServices {
         productAllotmentId: id,
       },
     });
-    if (!company) {
-      throw new NotFoundException('company does not exist');
-    }
+     
     return company;
   }
-  async getAllAllotedProduct(): Promise<productAllotment[]> {
+  async getAllotedProducts(): Promise<productAllotment[]> {
     return await this.productAllotment.find();
   }
   async createAllotedProduct(data) {
@@ -40,9 +38,7 @@ export class productAllotmentServices {
     data: Partial<updateProductAllotmentDto>,
   ) {
     try {
-      if (!id) {
-        throw new BadRequestException('Company id is missing');
-      }
+      
       return await this.productAllotment.update({ productAllotmentId: id }, data);
     } catch (err) {
       console.log(err);

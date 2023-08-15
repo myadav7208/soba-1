@@ -5,7 +5,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 export class vendor {
     @PrimaryGeneratedColumn()
-    vendorId
+    vendorId:number
 
     @Column({ name: "owner", nullable: true })
     ownerName: string
@@ -15,6 +15,11 @@ export class vendor {
 
     @Column({ name: "contact" })
     contact: string
+
+    @Column({ name: "companyId" })
+    companyId:number
+
+
 
     @Column({ name: "email", nullable: true })
     email: string

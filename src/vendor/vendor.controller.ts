@@ -1,7 +1,7 @@
 import {
   Body,
   Controller,
-  NotFoundException,
+ 
   BadRequestException,
   Param,
   ParseIntPipe,
@@ -9,8 +9,9 @@ import {
   Get,
   UsePipes,
   ValidationPipe,
-  Patch,
-  Delete
+  Put,
+  Delete,
+  Query
 } from '@nestjs/common';
 import { vendorServices } from './vendor.service';
  
@@ -27,45 +28,46 @@ export class vendorController {
   // get one vendor by its id
 
   @Get(':id')
-  async getOnevendor(
+  async getVendor(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<vendor> {
     return await this.vendorServices.getOnevendor(id);
   }
   // get all vendor
   @Get()
-  async getvendor() {
+  async getVendors() {
     return await this.vendorServices.getALLvendor();
   }
 
   // create vendor
-  @Post('create')
+  @Post( )
   @UsePipes(new ValidationPipe())
   async create(@Body() data: createVendorDto) {
     return await this.vendorServices.createvendor(data);
   }
 
   // update vendor by its id
-  @Patch('update/:id')
+  @Put(':id')
   @UsePipes(new ValidationPipe())
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() data: updateVendorDto,
   ) {
-    const res = await this.vendorServices.updatevendor(id, data);
+    return await this.vendorServices.updatevendor(id, data);
     
-    if (res.affected <1) {
-      throw new BadRequestException('something went wrong please try again later');
-    }
-    return {
-      message: 'successfully updated'
-    };
+     
   }
 
 
    //delete vendor with id
-   @Delete('delete/:id')
+   @Delete(':id')
    async delete(@Param('id',ParseIntPipe)id:number){
           await this.vendorServices.deleteVendor(id)
+   }
+
+
+   @Get('company/get')
+   async companyClients(@Query('companyId',ParseIntPipe) companyId:number){
+         return this.vendorServices.getCompanyVendors(companyId)
    }
 }

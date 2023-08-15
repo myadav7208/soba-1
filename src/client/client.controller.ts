@@ -8,9 +8,10 @@ import {
   Get,
   UsePipes,
   ValidationPipe,
-  Patch,
-  UseInterceptors,
+  Put,
+  
   Delete,
+  Query,
 } from '@nestjs/common';
 import { clientServices } from './client.service';
 
@@ -18,7 +19,8 @@ import { updateClientDto } from 'src/dtos/client/update.dto';
 
 import { Client } from 'src/entity/client.entity';
 import { createClientDto } from 'src/dtos/client/create.dto';
-import { ResponseFormatInterceptor } from '../middlewares/response-format.middleware';
+ 
+ 
 
 
 @Controller('client')
@@ -41,14 +43,14 @@ export class clientController {
   }
 
   // create client
-  @Post('create')
+  @Post( )
   @UsePipes(new ValidationPipe())
   async create(@Body() data: createClientDto) {
     return await this.clientServices.createClient(data);
   }
 
   // update client by its id
-  @Patch('update/:id')
+  @Put(':id')
   @UsePipes(new ValidationPipe())
   async update(
     @Param('id', ParseIntPipe) id: number,
@@ -65,8 +67,14 @@ export class clientController {
   }
 
    //delete client with id
-   @Delete('delete/:id')
+   @Delete(':id')
    async delete(@Param('id',ParseIntPipe)id:number){
           await this.clientServices.deleteclient(id)
    }
+
+
+   @Get('company/get')
+    async companyClients(@Query('companyId',ParseIntPipe) companyId:number){
+          return this.clientServices.getCompanyClients(companyId)
+    }
 }

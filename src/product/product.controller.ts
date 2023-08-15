@@ -10,6 +10,7 @@ import {
  
   Put,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { productServices } from './product.service';
  
@@ -26,14 +27,14 @@ export class productController {
   // get one product by its id
 
   @Get(':id')
-  async getOneProduct(
+  async getProduct(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<product> {
     return await this.productServices.getOneProduct(id);
   }
   // get all product
   @Get()
-  async getProduct() {
+  async getProducts() {
     return await this.productServices.getALLProduct();
   }
 
@@ -45,7 +46,7 @@ export class productController {
   }
 
   // update product by its id
-  @Put('update/:id')
+  @Put(':id')
  
   async update(
     @Param('id', ParseIntPipe) id: number,
@@ -59,9 +60,13 @@ export class productController {
   }
 
   //delete product with id
-  @Delete('delete/:id')
+  @Delete(':id')
   async delete(@Param('id',ParseIntPipe)id:number){
        return this.productServices.deleteProduct(id)
   }
 
+  @Get('product/get')
+  async companyClients(@Query('companyId',ParseIntPipe) companyId:number){
+        return this.productServices.getCompanyProducts(companyId)
+  }
 }

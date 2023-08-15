@@ -1,6 +1,7 @@
 import {
   IsEmail,
   IsNotEmpty,
+  IsNumber,
   IsNumberString,
   IsOptional,
   IsString,
@@ -19,6 +20,10 @@ export class createVendorDto {
   @IsNumberString()
   @IsNotEmpty()
   contact: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  companyId:number;
 
   @IsString()
   @IsOptional()

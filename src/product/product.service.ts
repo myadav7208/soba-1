@@ -20,7 +20,7 @@ export class productServices {
     const product = await this.product.findOne({
        where:{
         productId:id
-       }
+       },relations:['company']
     });
     if (!product) {
       throw new NotFoundException('product does not exist');
@@ -48,4 +48,10 @@ export class productServices {
   async deleteProduct(id:number){
     return await this.product.delete({productId:id})
  }
+ 
+ async getCompanyProducts(id:number){
+  return await this.product.find({where:{companyId:id}})
+
+
+}
 }

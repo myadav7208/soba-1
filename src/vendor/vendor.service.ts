@@ -48,4 +48,12 @@ export class vendorServices {
   async deleteVendor(id:number){
     return await this.vendor.delete({vendorId:id})
  }
+
+
+ 
+ async getCompanyVendors(id:number){
+  return await this.vendor.find({where:{companyId:id}})
+
+
+}
 }

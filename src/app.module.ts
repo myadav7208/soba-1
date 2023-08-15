@@ -17,9 +17,11 @@ import { vendor } from './entity/vendor.entity';
 import { productModule } from './product/product.module';
 import { productAllotment } from './entity/productAllotment.entity';
 import { productAllotmentModule } from './productAlllotment/productAllotment.module';
+ 
 
 @Module({
   imports: [
+     
     ConfigModule.forRoot({
       isGlobal: true,
       load: [config],

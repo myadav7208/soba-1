@@ -6,11 +6,13 @@ import {
   ParseIntPipe,
   Post,
   Get,
-  UsePipes,
-  ValidationPipe,
+  
   Put,
-  UseInterceptors,
+   
   Delete,
+  UseFilters,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { productAllotmentServices } from './productAllotment.service';
 import  {createProductAllotmentDto} from 'src/dtos/productAllotment/create.dto';
@@ -18,6 +20,8 @@ import { updateProductAllotmentDto } from 'src/dtos/productAllotment/update.dto'
 import { productAllotment } from 'src/entity/productAllotment.entity';
  
 import { Public } from '../auth/public.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
+ import { storage } from './storage.config';
  
 @Controller('productAllotment')
  
@@ -35,12 +39,12 @@ export class productAllotmentController {
   @Public()
   async getproductAllotment() {
       
-    return await this.productAllotmentServices.getAllAllotedProduct();
+    return await this.productAllotmentServices.getAllotedProducts();
   }
 
   // create productAllotment
   @Post()
-  // @UsePipes(new ValidationPipe())
+   
   async create(@Body() data: createProductAllotmentDto) {
     
     return await this.productAllotmentServices.createAllotedProduct(data);
@@ -51,9 +55,7 @@ export class productAllotmentController {
   
   async update(@Param('id', ParseIntPipe) id: number, @Body() data: Partial<updateProductAllotmentDto>) {
     try {
-        console.log(
-          !data
-        )
+        
       return await this.productAllotmentServices.updateAllotedProduct(id, data);
     } catch (err) {
       throw new BadRequestException('something went wrong please try again');
@@ -61,8 +63,23 @@ export class productAllotmentController {
   }
 
    //delete productAllotment with id
-   @Delete('delete/:id')
+   @Delete(':id')
    async delete(@Param('id',ParseIntPipe)id:number){
-          await this.productAllotmentServices.deleteAllotedProduct(id)
+         return await this.productAllotmentServices.deleteAllotedProduct(id)
    }
-}
+
+
+   // file uploading using multer 
+   @Post('upload')
+   
+   @UseInterceptors(
+     FileInterceptor(
+       "file",  
+       { storage }
+     )
+   )
+   async upload(@UploadedFile() file:Express.Multer.File) {
+     return file;
+   }
+ }
+

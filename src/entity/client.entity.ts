@@ -6,6 +6,7 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Company } from './company.entity';
@@ -15,7 +16,7 @@ import { Company } from './company.entity';
 export class Client extends BaseEntity {
 
   @PrimaryGeneratedColumn()
-  clientId;
+  clientId:number
 
   @Column({ name: "company" })
   companyName: string;
@@ -37,7 +38,10 @@ export class Client extends BaseEntity {
 
   @Column({ name: "city" })
   city: string;
-  @ManyToMany((type)=>Company,(company)=>company.clients,{cascade:true})
-   
-    companies:Company[]
+
+  @Column({name:"companyId"})
+    companyId:number
+ 
+    @ManyToOne (() => Company, company => company)
+    company:Company;
 }

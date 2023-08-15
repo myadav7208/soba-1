@@ -1,5 +1,6 @@
  
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Company } from "./company.entity";
 
 @Entity({name:"product"})
 
@@ -71,6 +72,5 @@ export class product{
     @Column({name:"Company_Id",nullable:true})
     companyId:number
 
-      
-
+     
 }

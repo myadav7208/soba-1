@@ -58,7 +58,7 @@ export class companyController {
   }
 
    //delete company with id
-   @Delete('delete/:id')
+   @Delete(':id')
    async delete(@Param('id',ParseIntPipe)id:number){
           await this.companyServices.deleteCompany(id)
    }

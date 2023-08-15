@@ -12,6 +12,9 @@ export class productAllotment extends BaseEntity{
 
      @Column({name:"vendorId"})
       vendorId:number
+      
+     @Column({name:"companyId"})
+      companyId:number
 
      @Column({name:"Size",nullable:true})
       size:string

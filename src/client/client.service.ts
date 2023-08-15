@@ -17,11 +17,13 @@ export class clientServices {
     private readonly client: Repository<Client>,
   ) { }
   async getOneClient(id: number) {
-    const client = await this.client.findOne({relations:['Company']});
-    if (!client) {
-      throw new NotFoundException('client doest not exist');
-    }
-    return client;
+    return  await this.client.findOne({
+      where: {
+        clientId: id,
+        
+      },relations:["companies"]
+    });
+   
   }
   async getALLClient(): Promise<Client[]> {
     const allCleint = await this.client.find();
@@ -40,4 +42,10 @@ export class clientServices {
   async deleteclient(id:number){
     return await this.client.delete({clientId:id})
  }
+    
+    async getCompanyClients(id:number){
+      return await this.client.find({where:{companyId:id}})
+   
+    
+    }
 }

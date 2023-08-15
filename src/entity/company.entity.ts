@@ -1,5 +1,6 @@
-import { BaseEntity, Column, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Client } from "./client.entity";
+import { product } from "./product.entity";
 
 @Entity({ name: "company" })
 export class Company extends BaseEntity {
@@ -31,7 +32,5 @@ export class Company extends BaseEntity {
       @Column({ name: "pinCode" })
       pinCode: string;
 
-      @ManyToMany((type)=>Client,client=>client.companies)
-      @JoinColumn()
-       clients:Client[]
+  
 }
